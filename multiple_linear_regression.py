@@ -13,9 +13,17 @@ import pandas as pd
 
 
 # Importing the dataset
-dataset = pd.read_csv('Data.csv')
+dataset = pd.read_csv('50_Startups.csv')
 X = dataset.iloc[:,:-1].values
-y = dataset.iloc[:, 3].values
+y = dataset.iloc[:, 4].values
+
+# Taking care of categorical data
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+labelEncoder_x = LabelEncoder()
+X[:,3] = labelEncoder_x.fit_transform(X[:,3])
+oneHotEncoder = OneHotEncoder(categorical_features = [3])
+X = oneHotEncoder.fit_transform(X).toarray()
+
 
 # Splitting the data into training and test sets
 from sklearn.model_selection import train_test_split
