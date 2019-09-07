@@ -34,3 +34,15 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_st
 sc_X = StandardScalar()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)"""
+
+# Fitting multiple linear regression to the training set
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+# Predicting the test set results
+y_pred = regressor.predict(X_test)
+
+# Building the optimal model using Backward Elimination
+import statsmodels.formula.api as sm
+X = np.append(arr= np.ones((50,1)).astype(int), values= X, axis = 1)
